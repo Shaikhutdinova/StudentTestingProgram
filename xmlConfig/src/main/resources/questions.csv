@@ -1,0 +1,6 @@
+Question,Answer 1,Answer 2,Answer 3,Answer 4,Correct Answer, Correct Answers Count
+What is the core concept of Spring Framework?,Dependency Injection,Aspect-Oriented Programming,Data Access,Web Development,Dependency Injection,1
+What is the main purpose of the @Component annotation?,Mark a class as a Spring component,Define a configuration class,Create a database connection,Define a web controller,Mark a class as a Spring component,1
+Which of these is NOT a core Spring module?,Spring Core,Spring Data,Spring AOP,Spring Web,Spring Data,1
+What are the benefits of using Spring Framework?,Reduced boilerplate code,Improved testability,Simplified configuration,Increased performance,Reduced boilerplate code,Improved testability,Simplified configuration,2
+What is the difference between @Autowired and @Resource?,@Autowired uses type matching, @Resource uses name matching,Both annotations are the same,None of the above,@Autowired uses type matching,@Resource uses name matching,2
