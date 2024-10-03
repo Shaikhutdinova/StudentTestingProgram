@@ -5,16 +5,19 @@ import org.example.model.Question;
 import org.example.model.User;
 import org.example.service.QuestionService;
 import org.example.service.QuestionServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
 
+@ComponentScan
+@Configuration
 public class Main {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         QuestionService questionService = (QuestionServiceImpl) context.getBean(QuestionServiceImpl.class);
         List<Question> questions = questionService.getQuestions();
 
