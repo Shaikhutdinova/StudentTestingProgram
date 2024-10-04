@@ -20,7 +20,7 @@ public class User {
     }
 
     public void setPoints(int points) {
-        this.points += points;
+        this.points = points;
     }
 
     public int getPoints() {
@@ -31,4 +31,7 @@ public class User {
         return group;
     }
 
+    public void addPoints(int points) {
+        this.points += points;
+    }
 }

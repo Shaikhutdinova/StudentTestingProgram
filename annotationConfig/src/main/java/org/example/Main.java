@@ -1,58 +1,21 @@
 package org.example;
 
-import org.example.model.Answer;
-import org.example.model.Question;
 import org.example.model.User;
-import org.example.service.QuestionService;
-import org.example.service.QuestionServiceImpl;
+import org.example.service.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
 
 @ComponentScan
 @Configuration
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        QuestionService questionService = (QuestionServiceImpl) context.getBean(QuestionServiceImpl.class);
-        List<Question> questions = questionService.getQuestions();
-
-        System.out.print("Enter your:\n" + "1. Name: ");
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
-        System.out.print("2. Group: ");
-        String group = scanner.nextLine();
-        User student = new User(name, group, 0);
-
-        for (Question question : questions) {
-            System.out.println(question.toString());
-            System.out.println("If there are several answers, list them separated by commas");
-            System.out.print("Your answer: ");
-            String answer = scanner.nextLine();
-            System.out.println();
-
-            String[] studentAnswers = answer.split(",");
-            if (studentAnswers.length == question.getCountCorrectAnswers()) {
-                int point = 0;
-                for (String answ : studentAnswers) {
-                    answ = answ.trim();
-                    for (Answer variant : question.getVariants()){
-                        if(answ.equalsIgnoreCase(variant.getVariant())){
-                            point++;
-                        }
-                    }
-                }
-
-                if (point == question.getCountCorrectAnswers()){
-                    student.setPoints(1);
-                }
-            }
-        }
-        scanner.close();
+        QuizService quiz = (QuizServiceImpl) context.getBean(QuizServiceImpl.class);
+        UserService user = (UserServiceImpl) context.getBean(UserServiceImpl.class);
+        User student = user.getStudentFromConsole();
+        quiz.start(student);
 
         System.out.println("You have " + student.getPoints() + " points");
     }
